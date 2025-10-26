@@ -1,0 +1,46 @@
+# fly.toml
+
+# Replace with your actual Fly app name
+app = "escola-db"
+primary_region = "gru" # São Paulo, Brazil region
+
+# Instruct Fly.io to use Paketo Buildpacks to build your Java app
+[build]
+builder = "paketobuildpacks/builder-jammy-base:latest"
+
+# Define environment variables
+# CRITICAL: Set database credentials and secrets using 'fly secrets set'!
+# Example: fly secrets set SPRING_DATASOURCE_URL="jdbc:postgresql://your-db-host.internal:5432/your-db-name"
+[env]
+# Tell Spring Boot to listen on port 8080 internally (matches internal_port below)
+SERVER_PORT = "8080"
+
+flyctl secrets set `
+SPRING_DATASOURCE_URL="jdbc:postgresql://<host>:5432/<dbname>?sslmode=require" `
+SPRING_DATASOURCE_USERNAME="<user>" `
+SPRING_DATASOURCE_PASSWORD="<pass>" `
+API_SECURITY_TOKEN_SECRET="<seu_jwt_secret>" -a escola-db -y
+
+# Define how Fly.io exposes your application to the internet
+[[services]]
+protocol = "tcp"
+internal_port = 8080 # The port your Spring Boot app listens on INSIDE the container
+
+# Define external ports and handlers
+[[services.ports]]
+port = 80          # Handle standard HTTP requests
+handlers = ["http"]
+force_https = true # Automatically redirect HTTP to HTTPS
+
+[[services.ports]]
+port = 443         # Handle HTTPS requests
+handlers = ["tls", "http"] # Handle TLS termination, then forward as HTTP
+
+# Basic TCP health check to ensure the app is listening
+# For a better check, enable Spring Boot Actuator and use an HTTP check:
+# [[services.http_checks]]
+#   path = "/actuator/health"
+[[services.tcp_checks]]
+interval = "15s"
+timeout = "2s"
+grace_period = "5s" # Give the app time to start before checking
