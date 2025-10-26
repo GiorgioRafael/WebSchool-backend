@@ -1,0 +1,11 @@
+package com.example.escola.infrastructure.web.dto.food;
+
+import com.example.escola.domain.entities.Food;
+
+public record FoodResponseDTO(long id, String title, String image, Integer price) {
+
+    public FoodResponseDTO(Food food){
+        this(food.getId(), food.getTitle(),food.getImage(), food.getPrice());
+    }
+
+}
