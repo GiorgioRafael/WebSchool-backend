@@ -21,6 +21,13 @@ public class SecurityConfigurations {
     @Autowired
     private SecurityFilter securityFilter;
 
+    // ADICIONADO: Define os caminhos do Swagger que devem ser públicos
+    private static final String[] SWAGGER_PATHS = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -29,8 +36,10 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/alunos").hasRole("ADMIN") //para acessar os alunos (info pessoais, precisa ser admin)
-                        .anyRequest().authenticated() //qualquer outra rota deve ser somente autenticado
+                        // ADICIONADO: Libera o acesso aos caminhos do Swagger
+                        .requestMatchers(SWAGGER_PATHS).permitAll()
+                        .requestMatchers(HttpMethod.POST, "/alunos").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

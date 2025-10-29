@@ -9,6 +9,7 @@ com\example\escola\application\service\TurmaService.class
 com\example\escola\infrastructure\web\dto\professor\ProfessorResponseDTO.class
 com\example\escola\domain\entities\Pessoa.class
 com\example\escola\domain\entities\Turma.class
+com\example\escola\config\OpenApiConfig.class
 com\example\escola\application\repositories\EnderecoRepository.class
 com\example\escola\infrastructure\web\controllers\AuthenticationController.class
 com\example\escola\infrastructure\web\dto\food\FoodResponseDTO.class
