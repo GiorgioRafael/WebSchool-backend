@@ -1,5 +1,5 @@
 package com.example.escola.infrastructure.web.dto.user;
 
-public record LoginResponseDTO (String token) {
+public record LoginResponseDTO (String token, String role) {
 
 }

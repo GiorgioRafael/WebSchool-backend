@@ -17,6 +17,8 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\e
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Disciplina.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Endereco.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Food.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Jogo.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\PerfilGame.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Pessoa.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Professor.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Responsavel.java
@@ -25,6 +27,7 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\e
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\enums\ProfessorStatus.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\enums\UserRole.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\EscolaApplication.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\AdminUserSeeder.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\SecurityConfigurations.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\SecurityFilter.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\TokenService.java

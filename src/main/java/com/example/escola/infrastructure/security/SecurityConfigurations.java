@@ -38,7 +38,16 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         // ADICIONADO: Libera o acesso aos caminhos do Swagger
                         .requestMatchers(SWAGGER_PATHS).permitAll()
-                        .requestMatchers(HttpMethod.POST, "/alunos").hasRole("ADMIN")
+                        //POST ALUNOS
+                        .requestMatchers(HttpMethod.POST, "/alunos").hasAnyRole("COORDENADOR", "SECRETARIA", "ADMIN")
+                        //rotas debug
+                        .requestMatchers(HttpMethod.GET, "/professores/debug/all").hasAnyRole("ADMIN")
+                        //PROFESSORES
+                        .requestMatchers(HttpMethod.POST, "/professores").hasAnyRole("SECRETARIA", "COORDENADOR", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/professores").hasAnyRole("SECRETARIA", "COORDENADOR", "ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/professores/**").hasAnyRole("SECRETARIA", "COORDENADOR", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/professores/**").hasAnyRole("SECRETARIA", "COORDENADOR", "ADMIN")
+
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

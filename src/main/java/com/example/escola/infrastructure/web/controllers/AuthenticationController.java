@@ -31,10 +31,11 @@ public class AuthenticationController {
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
-
+        User user = (User) auth.getPrincipal();
         var token = tokenService.generateToken((User) auth.getPrincipal());
+        String role = user.getRole() != null ? user.getRole().toString() : null;
 
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        return ResponseEntity.ok(new LoginResponseDTO(token, role));
     }
 
     @PostMapping("/register")

@@ -1,4 +1,5 @@
 com\example\escola\infrastructure\web\controllers\PessoaController.class
+com\example\escola\domain\entities\PerfilGame.class
 com\example\escola\infrastructure\web\dto\turma\TurmaResponseDTO.class
 com\example\escola\domain\entities\Disciplina.class
 com\example\escola\application\service\EnderecoService.class
@@ -22,6 +23,7 @@ com\example\escola\infrastructure\web\dto\turma\TurmaRequestDTO.class
 com\example\escola\application\repositories\PessoaRepository.class
 com\example\escola\application\service\PessoaService.class
 com\example\escola\infrastructure\web\dto\endereco\EnderecoDTO.class
+com\example\escola\domain\entities\Jogo.class
 com\example\escola\infrastructure\web\dto\professor\ProfessorRequestDTO.class
 com\example\escola\infrastructure\web\dto\user\UserResponseDTO.class
 com\example\escola\infrastructure\web\controllers\UserController.class
@@ -37,6 +39,7 @@ com\example\escola\infrastructure\web\controllers\TurmaController.class
 com\example\escola\infrastructure\web\dto\aluno\AlunoResponseDTO.class
 com\example\escola\infrastructure\web\dto\aluno\AlunoRequestDTO.class
 com\example\escola\infrastructure\web\dto\user\UserRequestDTO.class
+com\example\escola\infrastructure\security\AdminUserSeeder.class
 com\example\escola\application\repositories\ProfessorRepository.class
 com\example\escola\infrastructure\web\dto\user\LoginResponseDTO.class
 com\example\escola\infrastructure\web\dto\professor\ProfessorDetailDTO.class

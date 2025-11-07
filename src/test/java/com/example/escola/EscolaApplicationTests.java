@@ -1,20 +1,14 @@
-// java
 package com.example.escola;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = EscolaApplication.class, webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@EnableAutoConfiguration(exclude = {
-        DataSourceAutoConfiguration.class,
-        HibernateJpaAutoConfiguration.class
-})
+@SpringBootTest // Deixe apenas esta anotação
 class EscolaApplicationTests {
 
     @Test
     void contextLoads() {
+        // Este teste agora vai carregar o contexto completo 
+        // usando o banco de dados H2.
     }
 }
