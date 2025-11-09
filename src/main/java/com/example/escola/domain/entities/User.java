@@ -50,8 +50,13 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN) return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
-        else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        // Garante que o usuário receba uma authority específica do seu papel
+        // ex: ROLE_ADMIN, ROLE_SECRETARIA, ROLE_COORDENADOR, etc.
+        if (this.role == null) {
+            return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        String roleName = this.role.name(); // usa o nome do enum (ADMIN, SECRETARIA, ...)
+        return List.of(new SimpleGrantedAuthority("ROLE_" + roleName), new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
