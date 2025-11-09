@@ -1,5 +1,6 @@
 package com.example.escola.infrastructure.web.dto.professor;
 
+import com.example.escola.domain.enums.ProfessorStatus;
 import com.example.escola.infrastructure.web.dto.endereco.EnderecoDTO;
 import com.example.escola.domain.entities.Professor;
 
@@ -11,6 +12,7 @@ public record ProfessorResponseDTO(
         String nomeCompleto,
         String email,
         LocalDate dataContratacao,
+        ProfessorStatus professorStatus,
         EnderecoDTO endereco
 ) {
     public ProfessorResponseDTO(Professor professor) {
@@ -20,6 +22,7 @@ public record ProfessorResponseDTO(
                 professor.getNomeCompleto(),
                 professor.getEmail(),
                 professor.getDataContratacao(),
+                professor.getProfessorStatus(),
                 new EnderecoDTO(professor.getEndereco())
         );
     }

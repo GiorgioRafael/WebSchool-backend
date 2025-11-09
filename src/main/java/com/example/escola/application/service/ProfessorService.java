@@ -8,6 +8,7 @@ import com.example.escola.domain.entities.Pessoa;
 import com.example.escola.domain.entities.Professor;
 import com.example.escola.application.repositories.ProfessorRepository;
 import com.example.escola.domain.enums.ProfessorStatus;
+import com.example.escola.infrastructure.web.dto.endereco.EnderecoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -130,13 +131,15 @@ public class ProfessorService {
         // Usar o PessoaService para atualizar os dados da pessoa
         if (professor.getPessoa() != null) {
             PessoaRequestDTO pessoaDTO = new PessoaRequestDTO(
-                    dto.nomeCompleto(),
-                    dto.email(),
-                    dto.cpf(),
-                    professor.getRg(), // Mantém o RG existente
-                    professor.getDataNascimento(), // Mantém a data de nascimento existente
-                    dto.telefoneContato(),
-                    dto.endereco()
+                    dto.nomeCompleto() != null ? dto.nomeCompleto() : professor.getNomeCompleto(),
+                    dto.email() != null ? dto.email() : professor.getEmail(),
+                    dto.cpf() != null ? dto.cpf() : professor.getCpf(),
+                    // Mantém RG e data de nascimento a partir da entidade se DTO não fornecer
+                    (dto.rg() != null ? dto.rg() : professor.getRg()),
+                    (dto.dataNascimento() != null ? dto.dataNascimento() : professor.getDataNascimento()),
+                    dto.telefoneContato() != null ? dto.telefoneContato() : professor.getTelefoneContato(),
+                    // converter entidade Endereco -> EnderecoDTO quando necessário
+                    (dto.endereco() != null ? dto.endereco() : (professor.getEndereco() != null ? new EnderecoDTO(professor.getEndereco()) : null))
             );
 
             pessoaService.updatePessoa(professor.getPessoa().getId(), pessoaDTO);
@@ -145,6 +148,11 @@ public class ProfessorService {
         // Atualiza os campos específicos do professor
         if (dto.dataContratacao() != null) {
             professor.setDataContratacao(dto.dataContratacao());
+        }
+
+        // Atualiza o status do professor se fornecido no DTO
+        if (dto.professorStatus() != null) {
+            professor.setProfessorStatus(dto.professorStatus());
         }
 
         Professor saved = professorRepository.save(professor);

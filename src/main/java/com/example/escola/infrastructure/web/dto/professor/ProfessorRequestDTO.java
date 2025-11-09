@@ -1,6 +1,8 @@
 package com.example.escola.infrastructure.web.dto.professor;
 
 import com.example.escola.infrastructure.web.dto.endereco.EnderecoDTO;
+import com.example.escola.domain.enums.ProfessorStatus;
+import com.fasterxml.jackson.annotation.JsonAlias;
 
 import java.time.LocalDate;
 
@@ -18,6 +20,10 @@ public record ProfessorRequestDTO(
 
         //Dados para criacao do user
         String login,
-        String senha
+        String senha,
+
+        // Status do professor (opcional no PUT)
+        @JsonAlias({"status"})
+        ProfessorStatus professorStatus
 
 ) {}

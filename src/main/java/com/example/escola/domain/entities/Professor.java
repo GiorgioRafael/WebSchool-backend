@@ -105,4 +105,8 @@ public class Professor {
         if (pessoa == null) pessoa = new Pessoa();
         pessoa.setEndereco(endereco);
     }
+
+    public ProfessorStatus getProfessorStatus() {
+        return professorStatus;
+    }
 }
