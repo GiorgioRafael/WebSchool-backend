@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.security.Principal;
+
+import com.example.escola.infrastructure.config.aop.AuditIgnore;
 
 @RestController
 @RequestMapping("alunos")
@@ -54,12 +57,18 @@ public class AlunoController {
         repository.deleteById(aluno.getId());
     }
 
+    @AuditIgnore
     @PutMapping("/{matricula}") // Alterado para {matricula}
-    public void updateAluno(@PathVariable Long matricula, @RequestBody AlunoRequestDTO data){
-        // Buscar o aluno pela matrícula e depois atualizar
-        Aluno alunoData = repository.findByMatricula(matricula)
-                .orElseThrow(() -> new RuntimeException("Aluno não encontrado"));
-        // ... (lógica de update)
-        repository.save(alunoData);
+    public ResponseEntity<Void> updateAluno(@PathVariable Long matricula, @RequestBody AlunoRequestDTO data, Principal principal){
+        service.updateAluno(matricula, data, principal);
+        return ResponseEntity.ok().build();
+    }
+
+    // Novo endpoint: atualizar por ID (UUID/string)
+    @AuditIgnore
+    @PutMapping("/id/{id}")
+    public ResponseEntity<Void> updateAlunoById(@PathVariable String id, @RequestBody AlunoRequestDTO data, Principal principal){
+        service.updateAlunoById(id, data, principal);
+        return ResponseEntity.ok().build();
     }
 }
