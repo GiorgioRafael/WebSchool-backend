@@ -64,6 +64,17 @@ public class User implements UserDetails {
         return login;
     }
 
+    // Explicitly implement getPassword for UserDetails
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    // Provide getLogin() used elsewhere in the codebase
+    public String getLogin() {
+        return login;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return UserDetails.super.isAccountNonExpired();

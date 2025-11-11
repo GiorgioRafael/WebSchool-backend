@@ -1,3 +1,4 @@
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\repositories\ActivityLogRepository.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\repositories\AlunoRepository.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\repositories\EnderecoRepository.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\repositories\FoodRepository.java
@@ -6,13 +7,16 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\applicat
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\repositories\ResponsavelRepository.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\repositories\TurmaRepository.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\repositories\UserRepository.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\ActivityLogService.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\AlunoService.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\AuthorizationService.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\EnderecoService.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\LogSpecifications.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\PessoaService.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\ProfessorService.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\application\service\TurmaService.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\config\OpenApiConfig.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\ActivityLog.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Aluno.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Disciplina.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\entities\Endereco.java
@@ -27,11 +31,13 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\e
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\enums\ProfessorStatus.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\enums\UserRole.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\EscolaApplication.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\config\aop\AuditLogAspect.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\AdminUserSeeder.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\SecurityConfigurations.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\SecurityFilter.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\TokenService.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\AlunoController.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\AuditLogController.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\AuthenticationController.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\FoodController.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\PessoaController.java
@@ -44,6 +50,7 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastr
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\endereco\EnderecoDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\food\FoodRequestDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\food\FoodResponseDTO.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\log\ActivityLogResponseDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\pessoa\PessoaRequestDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\pessoa\PessoaResponseDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\professor\ProfessorDetailDTO.java

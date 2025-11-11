@@ -1,4 +1,5 @@
 com\example\escola\infrastructure\web\controllers\PessoaController.class
+com\example\escola\infrastructure\config\aop\AuditLogAspect.class
 com\example\escola\domain\entities\PerfilGame.class
 com\example\escola\infrastructure\web\dto\turma\TurmaResponseDTO.class
 com\example\escola\domain\entities\Disciplina.class
@@ -28,7 +29,10 @@ com\example\escola\infrastructure\web\dto\professor\ProfessorRequestDTO.class
 com\example\escola\infrastructure\web\dto\user\UserResponseDTO.class
 com\example\escola\infrastructure\web\controllers\UserController.class
 com\example\escola\application\repositories\ResponsavelRepository.class
+com\example\escola\application\service\LogSpecifications.class
+com\example\escola\infrastructure\web\dto\log\ActivityLogResponseDTO.class
 com\example\escola\application\repositories\FoodRepository.class
+com\example\escola\application\repositories\ActivityLogRepository.class
 com\example\escola\infrastructure\web\controllers\FoodController.class
 com\example\escola\domain\entities\Aluno.class
 com\example\escola\application\repositories\AlunoRepository.class
@@ -44,12 +48,15 @@ com\example\escola\application\repositories\ProfessorRepository.class
 com\example\escola\infrastructure\web\dto\user\LoginResponseDTO.class
 com\example\escola\infrastructure\web\dto\professor\ProfessorDetailDTO.class
 com\example\escola\infrastructure\web\dto\pessoa\PessoaResponseDTO.class
+com\example\escola\application\service\ActivityLogService.class
 com\example\escola\infrastructure\security\TokenService.class
 com\example\escola\infrastructure\web\dto\responsavel\ResponsavelDTO.class
+com\example\escola\infrastructure\web\controllers\AuditLogController.class
 com\example\escola\application\repositories\UserRepository.class
 com\example\escola\EscolaApplication.class
 com\example\escola\infrastructure\web\dto\pessoa\PessoaRequestDTO.class
 com\example\escola\infrastructure\web\dto\food\FoodRequestDTO.class
+com\example\escola\domain\entities\ActivityLog.class
 com\example\escola\infrastructure\security\SecurityFilter.class
 com\example\escola\infrastructure\web\dto\aluno\AlunoSimplificadoDTO.class
 com\example\escola\domain\entities\Professor.class
