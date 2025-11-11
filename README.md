@@ -27,44 +27,104 @@ Implementação (principais classes):
 ### Autenticação
 As rotas de logs são protegidas por autenticação (conforme as regras de segurança da aplicação). Envie o header de autorização apropriado (por exemplo: `Authorization: Bearer <token>`).
 
-## Rotas de Logs
+## Rotas de Logs (exemplos práticos)
+Abaixo exemplos práticos para cada rota de logs. Use `curl`/Insomnia/Postman — substitua `<SEU_TOKEN>` pelo token JWT válido.
+
 ### 1) GET /logs
-Retorna página de logs com filtros opcionais.
+Retorna uma página de logs com filtros opcionais.
 
-Query params:
+Query params suportados:
 - `username` (opcional): filtra por usuário exato.
-- `acao` (opcional): filtra pelo campo `action`.
-- `timeFilter` (opcional): um de `24h`, `7d`, `30d` ou `all`. Se omitido, retorna sem filtro de tempo.
-- Paginação (Spring): `page` (padrão 0), `size` (padrão 20), e `sort` (campo recomendável: `createdAt,desc`).
+- `acao` (opcional): filtra pelo campo `action` (substring ou chave).
+- `timeFilter` (opcional): um de `24h`, `7d`, `30d` ou `all`.
+- Paginação padrão: `page=0&size=20&sort=createdAt,desc`.
 
-Resposta (Page):
-- `content`: lista de objetos `ActivityLogResponseDTO` (id, username, action, details, createdAt)
-- `pageable`, `totalElements`, `totalPages`, etc.
+Exemplo básico (últimos 20 logs, ordenados por mais recentes):
 
-Exemplos:
-- `/logs?size=20&sort=createdAt,desc`
-- `/logs?username=admin&timeFilter=7d&size=50`
-- `/logs?acao=DELETE&timeFilter=24h&page=0&size=10&sort=createdAt,desc`
+```bash
+curl -X GET "http://localhost:8080/logs?size=20&sort=createdAt,desc" \
+  -H "Authorization: Bearer <SEU_TOKEN>" \
+  -H "Accept: application/json"
+```
+
+Exemplo filtrando por usuário e intervalo de tempo (últimos 7 dias):
+
+```bash
+curl -X GET "http://localhost:8080/logs?username=coordenador&timeFilter=7d&size=50" \
+  -H "Authorization: Bearer <SEU_TOKEN>" \
+  -H "Accept: application/json"
+```
+
+Exemplo paginado (segunda página, 10 por página):
+
+```bash
+curl -X GET "http://localhost:8080/logs?page=1&size=10&sort=createdAt,desc" \
+  -H "Authorization: Bearer <SEU_TOKEN>" \
+  -H "Accept: application/json"
+```
+
+Resposta (exemplo abreviado — Page):
+
+```json
+{
+  "content": [
+    {
+      "id": 123,
+      "username": "coordenador",
+      "action": "updateAluno @ PUT /alunos/123456",
+      "details": "nomeCompleto: João Antigo -> João Novo; email: antigo@example.com -> novo@example.com",
+      "createdAt": "2025-11-11T13:49:34.398109Z",
+      "createdAtFormatted": "11-11-2025T10:49:34.398-03:00"
+    }
+  ],
+  "pageable": { /* meta */ },
+  "totalElements": 42,
+  "totalPages": 3,
+  "last": false,
+  "size": 20,
+  "number": 0
+}
+```
+
+Observação: `details` para endpoints onde o service gera diffs (PUT/UPDATE) será uma string "campo: antigo -> novo"; para rotas auditadas automaticamente pelo AOP sem diff, `details` pode ser o JSON do request body.
 
 ### 2) GET /logs/recent
-Retorna os logs mais recentes como lista simples (sem metadados de paginação).
+Retorna uma lista simples com os logs mais recentes (sem metadados de paginação).
 
-Query params:
-- `size` (opcional): quantidade de itens. Padrão: 20. Mínimo interno: 1.
+Exemplo (últimos 20):
 
-Exemplos:
-- `/logs/recent` → últimos 20
-- `/logs/recent?size=50` → últimos 50
+```bash
+curl -X GET "http://localhost:8080/logs/recent" \
+  -H "Authorization: Bearer <SEU_TOKEN>" \
+  -H "Accept: application/json"
+```
 
-Resposta (List<ActivityLogResponseDTO>):
+Exemplo pedindo os últimos 50:
+
+```bash
+curl -X GET "http://localhost:8080/logs/recent?size=50" \
+  -H "Authorization: Bearer <SEU_TOKEN>" \
+  -H "Accept: application/json"
+```
+
+Resposta (exemplo):
+
 ```json
 [
   {
-    "id": 123,
+    "id": 130,
     "username": "admin",
     "action": "createProfessor @ POST /professores",
     "details": "{...}",
-    "createdAt": "2025-11-10T01:23:45.678Z"
+    "createdAt": "2025-11-11T12:00:00.000Z",
+    "createdAtFormatted": "11-11-2025T09:00:00.000-03:00"
+  },
+  {
+    "id": 129,
+    "username": "coordenador",
+    "action": "updateAluno @ PUT /alunos/123456",
+    "details": "email: antigo@example.com -> novo@example.com",
+    "createdAt": "2025-11-11T11:49:34.398Z"
   }
 ]
 ```
@@ -81,4 +141,4 @@ Resposta (List<ActivityLogResponseDTO>):
 
 ---
 
-Se precisar de exemplos prontos de requisições (curl/Insomnia) ou quiser expandir filtros (intervalo de datas `from`/`to`, busca textual no `details`), abra uma issue ou peça nos comentários que incluímos aqui.
+Se quiser, posso também adicionar exemplos para cURL que incluem o body de um PUT/POST específico (ex.: `PUT /alunos/{matricula}` mostrando o JSON de request usado para gerar o diff) ou gerar uma collection do Postman/Insomnia com essas requisições.

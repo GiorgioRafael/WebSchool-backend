@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import com.example.escola.infrastructure.config.aop.AuditIgnore;
+
 @RestController
 @RequestMapping("professores")
 public class ProfessorController {
@@ -55,10 +57,12 @@ public class ProfessorController {
     }
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @AuditIgnore
     @PutMapping("/{id}")
-    public ResponseEntity<ProfessorResponseDTO> updateProfessor(@PathVariable String id, @RequestBody ProfessorRequestDTO data) {
+    public ResponseEntity<ProfessorResponseDTO> updateProfessor(@PathVariable String id, @RequestBody ProfessorRequestDTO data, java.security.Principal principal) {
         try {
-            ProfessorResponseDTO updatedProfessor = service.updateProfessor(id, data);
+            String username = (principal != null && principal.getName() != null && !principal.getName().isBlank()) ? principal.getName() : com.example.escola.util.SecurityUtils.getCurrentUsername();
+            ProfessorResponseDTO updatedProfessor = service.updateProfessor(id, data, username);
             return ResponseEntity.ok(updatedProfessor);
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();

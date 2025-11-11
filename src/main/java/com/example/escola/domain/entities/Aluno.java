@@ -4,6 +4,7 @@ import com.example.escola.infrastructure.web.dto.aluno.AlunoRequestDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -30,6 +31,10 @@ public class Aluno {
     @ManyToMany(mappedBy = "alunos")
     private List<Turma> turmas;
 
+    // timestamps
+    private Instant createdAt = Instant.now();
+    private Instant updatedAt;
+
     public Aluno(){
         this.pessoa = new Pessoa();
     }
@@ -48,6 +53,16 @@ public class Aluno {
         if (data.endereco() != null) {
             this.pessoa.setEndereco(new Endereco(data.endereco()));
         }
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        if (createdAt == null) createdAt = Instant.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = Instant.now();
     }
 
     // Métodos de conveniência

@@ -3,15 +3,6 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
-        <entry key="$PROJECT_DIR$/src/main/java/com/example/escola/application/repositories/AlunoRepository.java">
-          <value>
-            <PendingDiffInfo>
-              <option name="filePath" value="$PROJECT_DIR$/src/main/java/com/example/escola/application/repositories/AlunoRepository.java" />
-              <option name="originalContent" value="package com.example.escola.application.repositories;&#10;&#10;import com.example.escola.domain.entities.Aluno;&#10;import org.springframework.data.jpa.repository.JpaRepository;&#10;import org.springframework.stereotype.Repository;&#10;&#10;import java.util.Optional;&#10;&#10;/**&#10; * Interface Repository para a entidade Aluno.&#10; * Fornece todos os métodos de acesso a dados (CRUD) para Alunos.&#10; */&#10;@Repository&#10;public interface AlunoRepository extends JpaRepository&lt;Aluno, String&gt; {&#10;    Optional&lt;Aluno&gt; findByMatricula(Long matricula);&#10;}&#10;" />
-              <option name="updatedContent" value="package com.example.escola.application.repositories;&#10;&#10;import com.example.escola.domain.entities.Aluno;&#10;import org.springframework.data.jpa.repository.JpaRepository;&#10;import org.springframework.stereotype.Repository;&#10;&#10;import java.util.Optional;&#10;&#10;/**&#10; * Interface Repository para a entidade Aluno.&#10; * Fornece todos os métodos de acesso a dados (CRUD) para Alunos.&#10; */&#10;@Repository&#10;public interface AlunoRepository extends JpaRepository&lt;Aluno, String&gt; {&#10;    Optional&lt;Aluno&gt; findByMatricula(Long matricula);&#10;}" />
-            </PendingDiffInfo>
-          </value>
-        </entry>
         <entry key="$PROJECT_DIR$/src/main/java/com/example/escola/controller/ProfessorController.java">
           <value>
             <PendingDiffInfo>

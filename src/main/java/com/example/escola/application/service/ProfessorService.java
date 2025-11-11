@@ -17,16 +17,23 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.escola.application.repositories.ActivityLogRepository;
+import com.example.escola.domain.entities.ActivityLog;
+import com.example.escola.util.SecurityUtils;
+
 @Service
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
     private final PessoaService pessoaService;
+    private final ActivityLogRepository activityLogRepository;
 
     @Autowired
     public ProfessorService(ProfessorRepository professorRepository,
-                            PessoaService pessoaService) {
+                            PessoaService pessoaService,
+                            ActivityLogRepository activityLogRepository) {
         this.professorRepository = professorRepository;
         this.pessoaService = pessoaService;
+        this.activityLogRepository = activityLogRepository;
     }
 
     @Transactional
@@ -124,9 +131,12 @@ public class ProfessorService {
     }
 
     @Transactional
-    public ProfessorResponseDTO updateProfessor(String id, ProfessorRequestDTO dto) {
+    public ProfessorResponseDTO updateProfessor(String id, ProfessorRequestDTO dto, String username) {
         Professor professor = professorRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Professor não encontrado"));
+
+        // capture before state
+        ProfessorDetailDTO before = new ProfessorDetailDTO(professor);
 
         // Usar o PessoaService para atualizar os dados da pessoa
         if (professor.getPessoa() != null) {
@@ -156,10 +166,61 @@ public class ProfessorService {
         }
 
         Professor saved = professorRepository.save(professor);
+
+        // capture after state and compute diff
+        ProfessorDetailDTO after = new ProfessorDetailDTO(saved);
+        String diff = buildDiff(before, after);
+
+        // create activity log with diff
+        String uname = (username != null && !username.isBlank()) ? username : SecurityUtils.getCurrentUsername();
+        String action = "updateProfessor @ PUT /professores/" + id;
+        ActivityLog log = new ActivityLog(uname, action, diff == null || diff.isBlank() ? "Sem alterações" : diff);
+        activityLogRepository.save(log);
+
         return new ProfessorResponseDTO(saved);
     }
 
     public void deleteProfessor(String id) {
         professorRepository.deleteById(id);
+    }
+
+    private String buildDiff(ProfessorDetailDTO before, ProfessorDetailDTO after) {
+        StringBuilder sb = new StringBuilder();
+
+        // compare person fields
+        if (!equalsNullable(before.nomeCompleto(), after.nomeCompleto()))
+            sb.append("nomeCompleto: ").append(before.nomeCompleto()).append(" -> ").append(after.nomeCompleto()).append("; ");
+        if (!equalsNullable(before.email(), after.email()))
+            sb.append("email: ").append(before.email()).append(" -> ").append(after.email()).append("; ");
+        if (!equalsNullable(before.cpf(), after.cpf()))
+            sb.append("cpf: ").append(before.cpf()).append(" -> ").append(after.cpf()).append("; ");
+        if (!equalsNullable(before.rg(), after.rg()))
+            sb.append("rg: ").append(before.rg()).append(" -> ").append(after.rg()).append("; ");
+        if (!equalsNullable(String.valueOf(before.dataNascimento()), String.valueOf(after.dataNascimento())))
+            sb.append("dataNascimento: ").append(before.dataNascimento()).append(" -> ").append(after.dataNascimento()).append("; ");
+        if (!equalsNullable(before.telefoneContato(), after.telefoneContato()))
+            sb.append("telefoneContato: ").append(before.telefoneContato()).append(" -> ").append(after.telefoneContato()).append("; ");
+
+        // endereco: compare as string
+        String beforeEndereco = before.endereco() != null ? before.endereco().toString() : null;
+        String afterEndereco = after.endereco() != null ? after.endereco().toString() : null;
+        if (!equalsNullable(beforeEndereco, afterEndereco))
+            sb.append("endereco: ").append(beforeEndereco).append(" -> ").append(afterEndereco).append("; ");
+
+        // professor-specific fields
+        if (!equalsNullable(String.valueOf(before.dataContratacao()), String.valueOf(after.dataContratacao())))
+            sb.append("dataContratacao: ").append(before.dataContratacao()).append(" -> ").append(after.dataContratacao()).append("; ");
+        if (!equalsNullable(String.valueOf(before.professorStatus()), String.valueOf(after.professorStatus())))
+            sb.append("professorStatus: ").append(before.professorStatus()).append(" -> ").append(after.professorStatus()).append("; ");
+
+        String res = sb.toString().trim();
+        if (res.endsWith(";")) res = res.substring(0, res.length() - 1);
+        return res;
+    }
+
+    private boolean equalsNullable(Object a, Object b) {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        return a.equals(b);
     }
 }
