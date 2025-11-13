@@ -31,6 +31,7 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\e
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\enums\ProfessorStatus.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\domain\enums\UserRole.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\EscolaApplication.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\config\aop\AuditIgnore.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\config\aop\AuditLogAspect.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\AdminUserSeeder.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\security\SecurityConfigurations.java
@@ -44,6 +45,7 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastr
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\ProfessorController.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\TurmaController.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\controllers\UserController.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\aluno\AlunoDetailDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\aluno\AlunoRequestDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\aluno\AlunoResponseDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\aluno\AlunoSimplificadoDTO.java
@@ -66,3 +68,6 @@ C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastr
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\user\RegisterDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\user\UserRequestDTO.java
 C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\infrastructure\web\dto\user\UserResponseDTO.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\util\ChangeDetector.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\util\SecurityUtils.java
+C:\Users\giorg\Documents\GitHub\escola\src\main\java\com\example\escola\util\UpdateUtils.java

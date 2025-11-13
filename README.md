@@ -142,3 +142,12 @@ Resposta (exemplo):
 ---
 
 Se quiser, posso também adicionar exemplos para cURL que incluem o body de um PUT/POST específico (ex.: `PUT /alunos/{matricula}` mostrando o JSON de request usado para gerar o diff) ou gerar uma collection do Postman/Insomnia com essas requisições.
+
+## Enviando para a instancia EC2
+- scp ./target/FILENAME_HERE ec2-user@ec2-52-86-210-17.compute-1.amazonaws.com:/home/ec2-user
+- ssh ec2-user@ec2-52-86-210-17.compute-1.amazonaws.com:/home/ec2-user
+- ls 
+- sudo lsof -i :8080
+- kill @
+- nohup java jar ...
+- test link > 
